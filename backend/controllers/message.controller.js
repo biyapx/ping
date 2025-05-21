@@ -5,14 +5,14 @@ import cloudinary from "../lib/cloudinary.js";
 export const getUsersForSideBar = async (req, res) => {
   try {
     const loggedInUserId = req.user._id;
-    const users = await User.find({ _id: { $ne: loggedInUserId } }).select(
-      "-password"
-    );
-    if (!users) {
+    const filtersUsers = await User.find({
+      _id: { $ne: loggedInUserId },
+    }).select("-password");
+    if (!filtersUsers) {
       return res.status(404).json({ message: "No users found" });
     }
-    res.status(200).json(users);
-    console.log("Users fetched successfully:", users);
+    res.status(200).json(filtersUsers);
+    console.log("Users fetched successfully:", filtersUsers);
   } catch (error) {
     console.log("Error fetching users:", error);
     res.status(500).json({ message: "Internal server error" });

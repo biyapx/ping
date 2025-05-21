@@ -87,6 +87,16 @@ export const logout = (req, res) => {
   }
 };
 
+export const checkAuth = async (req, res) => {
+  try {
+    console.log("Successful");
+    res.status(200).json(req.user);
+  } catch (error) {
+    console.error("Error during authentication check:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 export const updateProfile = async (req, res) => {
   try {
     const { profilePic } = req.body;
@@ -111,15 +121,5 @@ export const updateProfile = async (req, res) => {
   } catch (error) {
     console.error("Error uploading profile picture:", error);
     return res.status(500).json({ message: "Error uploading profile picture" });
-  }
-};
-
-export const checkAuth = async (req, res) => {
-  try {
-    console.log("Successful");
-    res.status(200).json(req.user);
-  } catch (error) {
-    console.error("Error during authentication check:", error);
-    res.status(500).json({ message: "Internal server error" });
   }
 };
