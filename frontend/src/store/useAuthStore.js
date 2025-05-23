@@ -6,7 +6,7 @@ import { io } from "socket.io-client";
 const BASE_URL =
   import.meta.env.MODE === "development"
     ? "http://localhost:5000"
-    : "https://ping-neon-phi.vercel.app/";
+    : "https://ping-xyw7.onrender.com/";
 
 export const useAuthStore = create((set, get) => ({
   authUser: null,
