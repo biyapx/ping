@@ -3,8 +3,6 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
-import path from "path";
-
 import { connectDB } from "./lib/db.js";
 
 import authRoutes from "./routes/route.auth..js";
@@ -20,19 +18,16 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://ping-6ug3.vercel.app/",
     credentials: true,
+    methods: ["POST", "GET"],
   })
 );
-
+app.get("/", () => {
+  console.log("server started");
+});
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
-
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-});
 
 server.listen(PORT, () => {
   console.log("server is running on PORT:" + PORT);
